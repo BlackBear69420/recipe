@@ -9,7 +9,7 @@ const Search = ({ route }) => {
 
     const handleRecipePress = async (recipeId) => {
         try {
-            const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=732190a0a9474665ae4c0449cc40f0cc`);
+            const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=your-key`);
             const data = await response.json();
             navigation.navigate('RecipeDetails', { recipe: data });
         } catch (error) {

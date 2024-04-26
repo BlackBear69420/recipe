@@ -17,7 +17,7 @@ const Home = () => {
     const fetchRecipes = async () => {
       try {
         const response = await fetch(
-          'https://api.spoonacular.com/recipes/random?number=30&limitLicense=true&apiKey=732190a0a9474665ae4c0449cc40f0cc'
+          'https://api.spoonacular.com/recipes/random?number=30&limitLicense=true&apiKey=your-key'
         );
         const data = await response.json();
         setRecipes(data.recipes);
@@ -51,7 +51,7 @@ const Home = () => {
   const handleSearch = async () => {
     try {
       const response = await fetch(
-        `https://api.spoonacular.com/recipes/complexSearch?query=${searchQuery}&apiKey=732190a0a9474665ae4c0449cc40f0cc`
+        `https://api.spoonacular.com/recipes/complexSearch?query=${searchQuery}&apiKey=your-key`
       );
       const data = await response.json();
       setSearchResults(data.results);
