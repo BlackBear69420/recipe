@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { StyleSheet, Text, View, Image, FlatList,TouchableOpacity,ImageBackground} from 'react-native';
 import { useNavigation } from '@react-navigation/native';
+import { API_KEY } from '../../config';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 const Search = ({ route }) => {
@@ -9,7 +10,7 @@ const Search = ({ route }) => {
 
     const handleRecipePress = async (recipeId) => {
         try {
-            const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=your-key`);
+            const response = await fetch(`https://api.spoonacular.com/recipes/${recipeId}/information?apiKey=${API_KEY}`);
             const data = await response.json();
             navigation.navigate('RecipeDetails', { recipe: data });
         } catch (error) {
