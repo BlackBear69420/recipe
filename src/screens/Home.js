@@ -119,7 +119,7 @@ const navigation = useNavigation();
       const emailParts = storedUser.split('@');
       const emailPrefix = emailParts[0];
   
-      let newLikedIds = [...likedIds];
+      let newLikedIds = likedIds ? [...likedIds] : [];
       const stringRecipeId = String(recipeId); 
   
       if (newLikedIds.includes(stringRecipeId)) {
@@ -148,7 +148,7 @@ const navigation = useNavigation();
           <TouchableOpacity onPress={() => handleLike(item.id)}>
       <FontAwesomeIcon 
   size={25} 
-  color={likedIds.includes(String(item.id)) ? 'red' : 'white'}
+  color={likedIds?.includes(String(item.id)) ? 'red' : 'white'}
   style={{ borderColor: 'black', borderWidth: 1, borderRadius: 50 }}
   icon={faHeart} 
 />
