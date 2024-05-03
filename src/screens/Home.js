@@ -38,12 +38,11 @@ const navigation = useNavigation();
         const likedSnapshot = await firestore.collection('liked').doc(emailPrefix).get();
         const likedData = likedSnapshot.data();
   
-        if (likedData && likedData.likedId) {
-       if(!likedData.likedId===""){
-        const storedLikedIds = likedData.likedId.split(',');
-        setLikedIds(storedLikedIds);
-       }
+        if (likedData && likedData.likedId && likedData.likedId !== "") { 
+          const storedLikedIds = likedData.likedId.split(',');
+          setLikedIds(storedLikedIds);
         }
+  
   
         // Fetch random recipes
         const response = await fetch(

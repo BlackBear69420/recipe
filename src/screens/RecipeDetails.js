@@ -26,7 +26,7 @@ const RecipeDetails = ({ route }) => {
         const likedSnapshot = await firestore.collection('liked').doc(emailPrefix).get();
         const likedData = likedSnapshot.data();
   
-        if (likedData && likedData.likedId) {
+        if (likedData && likedData.likedId && likedData.likedId!=="") {
           const storedLikedIds = likedData.likedId.split(',');
           setLikedIds(storedLikedIds);
           console.log(storedLikedIds)
@@ -39,21 +39,17 @@ const RecipeDetails = ({ route }) => {
   
     fetchLikedRecipes();
   }, []);
-  
-  if (likedIds === null) {
-    // Liked recipes are being fetched
-    return <ActivityIndicator size="large" color="#0000ff" />;
-  }
+
   const handleLike = async (recipeId) => {
     try {
       const storedUser = await AsyncStorage.getItem('user');
       const emailParts = storedUser.split('@');
       const emailPrefix = emailParts[0];
   
-      let newLikedIds = [...likedIds];
+      let newLikedIds = likedIds ? [...likedIds] : [];
       const stringRecipeId = String(recipeId); // Convert recipeId to string
   
-      if (newLikedIds.includes(stringRecipeId)) {
+      if (newLikedIds?.includes(stringRecipeId)) {
         newLikedIds = newLikedIds.filter(id => id !== stringRecipeId);
       } else {
         newLikedIds.push(stringRecipeId);
@@ -80,7 +76,7 @@ const RecipeDetails = ({ route }) => {
        <TouchableOpacity onPress={() => handleLike(recipe.id)}>
       <FontAwesomeIcon 
   size={25} 
-  color={likedIds.includes(String(recipe.id)) ? 'red' : 'grey'} 
+  color={likedIds?.includes(String(recipe.id)) ? 'red' : 'grey'} 
   style={{ borderColor: 'black', borderWidth: 1, borderRadius: 50 }}
   icon={faHeart} 
 />
